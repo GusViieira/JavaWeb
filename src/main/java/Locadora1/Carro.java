@@ -19,7 +19,7 @@ public class Carro {
         this.status = status;
     }
     
-    public void Alterar (){
+    public void Alterar (CaractCarros ctCarro, boolean status){
         this.ctCarro = ctCarro;
         this.status = status;
     }

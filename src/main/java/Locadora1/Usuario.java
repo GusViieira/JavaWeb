@@ -1,6 +1,8 @@
 package Locadora1;
 import java.util.Scanner;
+
 public class Usuario {
+
     private String nome;
     private String email;
     private String senha;
@@ -10,30 +12,27 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
     }
-
-    public void Cadastrar (){
-        Scanner leitor = new Scanner(System.in);
+    public void Cadastrar (Scanner leitor){
         System.out.println("Informe o nome: ");
         this.nome = leitor.next();
         System.out.println("Informe o email: ");
         this.email = leitor.next();
         System.out.println("Informe a senha: ");
         this.senha = leitor.next();
-        leitor.close();
     }
-    public boolean Login (String email, String senha){
+    /*public boolean Login (String email, String senha){
         boolean valid = false;
         if(email.equals(this.email)){
             valid = true;
         }
         return valid;
-    }
-    
+    }*/
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
+        nome = nome.trim();
         this.nome = nome;
     }
 
@@ -42,6 +41,7 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
+        email = email.trim();
         this.email = email;
     }
 
@@ -50,11 +50,16 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
+        senha = senha.trim();
         this.senha = senha;
     }
-    
+
     @Override
-    public String toString(){
-        return "Nome: " + this.nome + "\nEmail: " + this.email + "\nSenha: " + this.senha; 
+    public String toString() {
+        return "Usuario{" +
+               "nome='" + nome + '\'' +
+               ", email='" + email + '\'' +
+               ", senha='" + senha + '\'' +
+               '}';
     }
 }

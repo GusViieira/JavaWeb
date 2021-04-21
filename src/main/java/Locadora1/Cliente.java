@@ -59,7 +59,7 @@ public class Cliente extends Usuario {
             case "senha" -> ant = ant.concat(this.getSenha());
         }
         do {//verifica e valida a digitação da nova string
-            Main.telasLocadora("LOCADORA PAO DURO", "EDITAR PERFIL", ant);
+            Main.telasLocadora("LOCADORA PAO DURO", "EDITAR " + str.toUpperCase(), ant);
             System.out.print("Digite o " + str + " (ou '-1' para sair): ");
             frase = scan.nextLine();
             frase = frase.trim();

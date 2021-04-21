@@ -10,8 +10,8 @@ public class Main {
         //u1.setNome("    Gabriel    ");
         c1.editarPerfil(scan);
         Carro car1 = new Carro("compacto","azul","2012","muito bem conservado", 12f);
-        c1.setCarAlug(car1);
-        c1.verCarroAlug();
+//        c1.setCarAlug(car1);
+//        c1.verCarroAlug();
         Funcionario f1 = new Funcionario("gabriel", "a@gmail.com", "qwerty");
         f1.setEditarCarro(car1);
         f1.editarCarro(scan);

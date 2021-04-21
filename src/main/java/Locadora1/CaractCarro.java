@@ -68,5 +68,14 @@ public class CaractCarro {
         System.out.print("Informe o valor:");
         this.setValor(scan.nextFloat());
     }
-    
+    @Override
+    public String toString() {
+        return "CaractCarro{" +
+               "modelo='" + modelo + '\'' +
+               ", cor='" + cor + '\'' +
+               ", ano='" + ano + '\'' +
+               ", descricao='" + descricao + '\'' +
+               ", valor=" + valor +
+               '}';
+    }
 }

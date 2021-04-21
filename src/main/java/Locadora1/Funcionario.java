@@ -84,9 +84,9 @@ public class Funcionario extends Usuario {
         public void editarCarro(Scanner scan) {
         int aux;
         do {
-            do { // verifica e valida a digitação da opcao para editar
+            do { // verifica e valida a digitação da opção para editar
                 System.out.println("\n");
-               System.out.println(super.toString()); // para testes
+               System.out.println(editarCarro.toString()); // para testes
                 Main.telasLocadora("LOCADORA PAO DURO", "EDITAR CARRO", Main.textosProntos(4));
                 System.out.print("Digite um valor: ");
                 aux = scan.nextInt();
@@ -117,16 +117,18 @@ public class Funcionario extends Usuario {
             case "valor" ->  ant = ant.concat(String.valueOf(this.getEditarCarro().getValor()));
         }
         do {//verifica e valida a digitação da nova string
-            Main.telasLocadora("LOCADORA PAO DURO", "EDITAR PERFIL", ant);
+            Main.telasLocadora("LOCADORA PAO DURO", "EDITAR " + str.toUpperCase(), ant);
             System.out.print("Digite o " + str + " (ou '-1' para sair): ");
             frase = scan.nextLine();
             frase = frase.trim();
         } while ((frase.length() == 0));
         if (!frase.equals("-1"))
             switch (str) { // atualiza a nova string
-                case "nome" -> super.setNome(frase);
-                case "email" -> super.setEmail(frase);
-                case "senha" -> super.setSenha(frase);
+                case "modelo" -> editarCarro.setModelo(frase);
+                case "cor" -> editarCarro.setCor(frase);
+                case "ano" -> editarCarro.setAno(frase);
+                case "descricao" -> editarCarro.setDescricao(frase);
+                case "valor" -> editarCarro.setValor(Float.parseFloat(frase));
             }
     }
 

@@ -16,10 +16,6 @@ public class CaractCarro {
         this.valor = valor;
     }
 
-    public CaractCarro(){
-
-    }
-
     public String getModelo() {
         return modelo;
     }

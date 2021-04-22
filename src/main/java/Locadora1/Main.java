@@ -4,12 +4,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
-    ArrayList<Carro> listaCarros = new ArrayList<Carro>();
-    private Carro carro;
-    
+    //ArrayList<Carro> listaCarros = new ArrayList<Carro>();
+    //private List<Carro> listaCarros; 
+
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        
         //CRIAR TESTES E INSTANCIAR
         Cliente c1 = new Cliente("gabriel", "a@gmail.com", "qwerty");
         Funcionario f1 = new Funcionario("Alan", "alan@gmail.com", "123456");
@@ -17,21 +16,25 @@ public class Main {
         Carro car1 = new Carro("compacto", "azul", "2012", "muito bem conservado", 12f);
         
         //ACOES
-        c1.editarPerfil(scan);
-        f1.editarPerfil(scan);
-        c1.setCarAlug(car1);
-        c1.verCarroAlug();
+        //c1.editarPerfil(scan);
+        //f1.editarPerfil(scan);
+        //c1.setCarAlug(car1);
+        //c1.verCarroAlug();
+        car1.editarCarro(scan);
         f1.setEditarCarro(car1);
-        f1.getEditarCarro();//precisa colocar scan, mas da erro
-//      this.listaCarros.add(new Carro.cadastrarCarro()); // MODIFICAR O CADASTRARCARRO (NÃO É STATIC)
+//      f1.getEditarCarro();//precisa colocar scan, mas da erro
+        ArrayList<Carro> carros = new ArrayList<Carro>();
+        Carro.cadastrarCarro(scan, carros);
+        for(Carro aux:carros){
+            System.out.println(aux);
+        }
 //        if(car1.cadastrarCarro(scan)) { // para testar o cadastro dos carros
 //            listaCarros.add(car1);
 //            System.out.println("O cadastro foi realizado com sucesso");
 //            System.out.println(listaCarros.toString());
 //        }else
 //            System.out.println("O cadastro nao foi realizado com sucesso\t Tente novamente...");
-
-//        
+//       
 //        for (Carro aux : listaCarros)
 //            System.out.println(aux); // testar a lista
     }
@@ -71,7 +74,7 @@ public class Main {
 
 
     public static String lerDados(Scanner scan, String texto) {
-        String dado = null;
+        String dado;
         do {
             System.out.printf("%s", texto);
             dado = scan.nextLine();

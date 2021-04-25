@@ -15,6 +15,7 @@ public class CaractCarro {
         this.descricao = descricao;
         this.valor = valor;
     }
+
     public CaractCarro(){
         
     }
@@ -58,35 +59,26 @@ public class CaractCarro {
     public void setValor(float valor) {
         this.valor = valor;
     }
-    @Override
-    public String toString() {
-        return "CaractCarro{" +
-               "modelo='" + modelo + '\'' +
-               ", cor='" + cor + '\'' +
-               ", ano='" + ano + '\'' +
-               ", descricao='" + descricao + '\'' +
-               ", valor=" + valor +
-               '}';
-    }
-    
+
     //metodo para cadastrar um carro
     public boolean obterCarro(Scanner scan) {
+        Carro car = new Carro();
         Main.telasLocadora("LOCADORA PAO DURO", "CADASTRAR CARRO", Main.textosProntos(5));
-        this.setModelo(Main.lerDados(scan, "Informe modelo (ou '-1' para sair): "));
-        if (!this.getModelo().equals("-1")) {
-            this.setCor(Main.lerDados(scan, "Informe cor (ou '-1' para sair):  "));
-            if (!this.getCor().equals("-1")) {
-                this.setAno(Main.lerDados(scan, "Informe ano (ou '-1' para sair): "));
-                if (!this.getAno().equals("-1")) {
-                    this.setDescricao(Main.lerDados(scan, "Informe descricao (ou '-1' para sair): "));
-                    if (!this.getDescricao().equals("-1")) {
-                        this.setValor(Float.parseFloat(Main.lerDados(scan, "Informe valor (ou '-1' para sair): ")));
-                        if (this.getValor() != -1) { // colocar os dados dentro de um dos elementos do objeto
-                            this.setModelo(this.getModelo());
-                            this.setCor(this.getCor());
-                            this.setAno(this.getAno());
-                            this.setDescricao(this.getDescricao());
-                            this.setValor(this.getValor());
+        car.setModelo(Main.lerDados(scan, "Informe modelo (ou '-1' para sair): "));
+        if (!car.getModelo().equals("-1")) {
+            car.setCor(Main.lerDados(scan, "Informe cor (ou '-1' para sair):  "));
+            if (!car.getCor().equals("-1")) {
+                car.setAno(Main.lerDados(scan, "Informe ano (ou '-1' para sair): "));
+                if (!car.getAno().equals("-1")) {
+                    car.setDescricao(Main.lerDados(scan, "Informe descricao (ou '-1' para sair): "));
+                    if (!car.getDescricao().equals("-1")) {
+                        car.setValor(Float.parseFloat(Main.lerDados(scan, "Informe valor (ou '-1' para sair): ")));
+                        if (car.getValor() != -1) { // colocar os dados dentro de um dos elementos do objeto
+                            this.setModelo(car.getModelo());
+                            this.setCor(car.getCor());
+                            this.setAno(car.getAno());
+                            this.setDescricao(car.getDescricao());
+                            this.setValor(car.getValor());
                             return true; // cadastro ocorreu de forma correta
                         }
                     }
@@ -105,7 +97,7 @@ public class CaractCarro {
                 System.out.println(this.toString()); // para testes
                 Main.telasLocadora("LOCADORA PAO DURO", "EDITAR CARRO", Main.textosProntos(4));
                 aux = Integer.parseInt(Main.lerDados(scan, "Digite um valor: "));
-            } while (!Main.verOpcao(aux, 0, 5));
+            } while (Main.verOpcao(aux, 0, 5));
             if (aux != 0)
                 switch (aux) {//vai para o metodo de editar o atributo do usuario
                     case 1 -> this.editarAtributoCarro(scan, "modelo");

@@ -1,5 +1,6 @@
 package Locadora1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Usuario {
@@ -7,29 +8,19 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private int idUsuario;
 
-    public Usuario(String nome, String email, String senha) {
+    public Usuario(String nome, String email, String senha, int idUsuario) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.idUsuario = idUsuario;
     }
 
-    public void Cadastrar(Scanner leitor) {
-        System.out.println("Informe o nome: ");
-        this.nome = leitor.next();
-        System.out.println("Informe o email: ");
-        this.email = leitor.next();
-        System.out.println("Informe a senha: ");
-        this.senha = leitor.next();
+    public Usuario() {
+
     }
 
-    /*public boolean Login (String email, String senha){
-        boolean valid = false;
-        if(email.equals(this.email)){
-            valid = true;
-        }
-        return valid;
-    }*/
     public String getNome() {
         return nome;
     }
@@ -57,6 +48,68 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public boolean cadastrarUsuario(Scanner scan) {
+        Cliente cl = new Cliente();
+        Main.telasLocadora("LOCADORA PAO DURO", "CADASTRAR USUARIO", Main.textosProntos(6));
+        cl.setNome(Main.lerDados(scan, "Informe o nome (ou '-1' para sair): "));
+        if (!cl.getNome().equals("-1")) {
+            cl.setEmail(Main.lerDados(scan, "Informe o email (ou '-1' para sair):  "));
+            if (!cl.getEmail().equals("-1")) {
+                cl.setSenha(Main.lerDados(scan, "Informe a senha (ou '-1' para sair): "));
+                if (!cl.getSenha().equals("-1")) { // colocar os dados dentro de um dos elementos do objeto
+                    this.setNome(cl.getNome());
+                    this.setEmail(cl.getEmail());
+                    this.setSenha(cl.getSenha());
+                    return true; // cadastro ocorreu de forma correta
+                }
+            }
+        }
+        return false;// cadastro não ocorreu
+    }
+
+    // metodo para tela de login, sendo o retorno para funcionario
+    public static int login(Scanner scan, ArrayList<Cliente> clientes, Funcionario f1, Funcionario f2) {
+        String login, senha;
+        Main.telasLocadora("LOCADORA PAO DURO", "LOGIN", Main.textosProntos(9));
+        int logar = 0; // inicializando o logar
+        do {
+            login = Main.lerDados(scan, "Informe o Email (ou '-1' para sair): ");
+            if (!login.equals("-1")) {
+                senha = Main.lerDados(scan, "Informe a senha (ou '-1' para sair): ");
+                if (!senha.equals("-1"))
+                    logar = Usuario.verLogin(login, senha, clientes, f1, f2);
+            }
+            if(logar == -1) // valor incorreto
+                System.out.println("Valor incorreto\tTente novamente...");
+        } while (logar == -1);
+        return logar;
+    }
+
+    // validacao de login
+    public static int verLogin(String email, String senha, ArrayList<Cliente> clientes, Funcionario f1, Funcionario f2) {
+        int valid = 0; // 0 - acesso negado, ID de acesso de cliente ou funcionario
+        if (email.equals(f1.getEmail()) && senha.equals(f1.getSenha())) // verifica login de funcionario1
+            valid = f1.getIdUsuario();
+
+        if (email.equals(f2.getEmail()) && senha.equals(f1.getSenha())) // verifica login de funcionario2
+            valid = f2.getIdUsuario();
+
+        for (Cliente aux : clientes) // verifica login de cliente
+            if (email.equals(aux.getEmail()) && senha.equals(aux.getSenha())) {
+                valid = aux.getIdUsuario();
+                break;
+            }
+        return valid;
+    }
+
     // metodo para editar as informações do usuario
     public void editarPerfil(Scanner scan) {
         int aux;
@@ -66,7 +119,7 @@ public class Usuario {
                 System.out.println(this.toString()); // para testes
                 Main.telasLocadora("LOCADORA PAO DURO", "EDITAR PERFIL", Main.textosProntos(2));
                 aux = Integer.parseInt(Main.lerDados(scan, "Digite um valor: "));
-            } while (!Main.verOpcao(aux, 0, 3));
+            } while (Main.verOpcao(aux, 0, 3));
             if (aux != 0)
                 switch (aux) {//vai para o metodo de editar o atributo do usuario
                     case 1 -> this.editarAtributoUsuario(scan, "nome");

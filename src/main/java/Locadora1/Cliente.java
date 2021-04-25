@@ -34,7 +34,7 @@ public class Cliente extends Usuario {  //HERANÇA DE USUARIO
     public static void cadastrarCliente(Scanner scan, ArrayList<Cliente> clientes) {
         Cliente cliente = new Cliente();
         if (cliente.cadastrarUsuario(scan)) {
-            cliente.setIdUsuario(clientes.size() + 1); // Id do usuario vai ser de 1 para cima
+            cliente.setIdUsuario(clientes.size() + 1); // IdUsuario VAI SER INDEX(posicao do array) + 1
             clientes.add(cliente);
         }
     }

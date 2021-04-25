@@ -1,6 +1,6 @@
-package Locadora1;
+package Locadora1;  //PACOTE
 
-import java.util.Scanner;
+import java.util.Scanner;   //BIBLIOTECAS
 import java.util.ArrayList;
 
 public class Main {
@@ -8,10 +8,10 @@ public class Main {
     //METODO PRINCIPAL DO PROGRAMA
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        ArrayList<Cliente> clientes = new ArrayList<>();     //LISTA DE CLIENTES
-        ArrayList<Carro> carros = new ArrayList<>();           //LISTA DE CARROS
-        Funcionario f1 = new Funcionario("Alan", "alan@gmail.com", "123456", -1);     //FUNCIONARIO f1
-        Funcionario f2 = new Funcionario("Gabriel", "gabriel@gmail.com", "123456", -2);     //FUNCIONARIO f2
+        ArrayList<Cliente> clientes = new ArrayList<>();       //INSTANCIA LISTA DE CLIENTES
+        ArrayList<Carro> carros = new ArrayList<>();           //INSTANCIA LISTA DE CARROS
+        Funcionario f1 = new Funcionario("Alan", "alan@gmail.com", "123456", -1);           //INSTANCIA FUNCIONARIO f1
+        Funcionario f2 = new Funcionario("Gabriel", "gabriel@gmail.com", "123456", -2);     //INSTANCIA FUNCIONARIO f2
         do {    //INICIO DO LOOPING DO MENU
             telasLocadora("LOCADORA PAO DURO", "BEM VINDO", textosProntos(8));
             switch (lerDados(scan, "Informe a ação que deseja: ")) {
@@ -38,7 +38,7 @@ public class Main {
 
     //METODO QUE VERIFICA SE opc ESTA ENTRE ini E fim
     public static boolean verOpcao(int opc, int ini, int fim) {
-        //opc FALSE - NUMERO QUE NAO EXISTE; opc TRUE - nuNUMERO QUE EXISTE
+        //opc FALSE - NUMERO QUE NAO EXISTE; opc TRUE - NUMERO QUE EXISTE
         return opc < ini || opc > fim;
     }
 
@@ -89,7 +89,7 @@ public class Main {
                           " %s\n", lin, nomeLoc, lin, nomeFun, lin, fun, lin);
     }
 
-    //LER E VALIDA DADO DE ENTREDA
+    //LER E VALIDAR DADOS DE ENTRADA
     public static String lerDados(Scanner scan, String texto) {
         String dado;
         do {

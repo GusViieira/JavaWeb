@@ -45,7 +45,7 @@ public class Carro extends CaractCarro {    //HERANÇA DE CARACTCARRO
     public static void cadastrarCarro(Scanner scan, ArrayList<Carro> carros) {
         Carro car = new Carro();
         if (car.obterCarro(scan)) {
-            car.setIdCarro(carros.size() + 1); // idCarro vai de 1 para cima
+            car.setIdCarro(carros.size() + 1); // idCarro É O INDEX(posicao do array) + 1
             car.setDispCarro(true);
             carros.add(car);
         }

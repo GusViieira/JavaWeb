@@ -3,7 +3,7 @@ package Locadora1;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Usuario {
+public abstract class Usuario {      //SUPER CLASSE ABSTRATA
 
     private String nome;
     private String email;
@@ -91,7 +91,7 @@ public class Usuario {
 
     //METODO PARA TELA DE LOGIN
     public static int login(Scanner scan, ArrayList<Cliente> clientes, Funcionario f1, Funcionario f2) {
-        String login, senha;    //LOGIN: 0 - INICIALIZADO LOGAR; -1 - VALOR INCORRETO; OUTRO VALOR POSITIVO - POSICAO (INDEX) DO CLIENTE
+        String login, senha=null;    //LOGIN: 0 - INICIALIZADO LOGAR; -1 - VALOR INCORRETO; OUTRO VALOR POSITIVO - POSICAO (INDEX) DO CLIENTE
         Main.telasLocadora("LOCADORA PAO DURO", "LOGIN", Main.textosProntos(3));
         int logar = 0;
         do {
@@ -101,9 +101,9 @@ public class Usuario {
                 if (!senha.equals("-1"))
                     logar = Usuario.verLogin(login, senha, clientes, f1, f2); //VERIFICACAO DOS DADOS DE LOGIN
             }
-            if(logar == -1)     //VALOR INCORRETO
+            if(logar == 0)     //VALOR INCORRETO
                 System.out.println("Valor incorreto\tTente novamente...");
-        } while (logar == -1);  //VALIDACAO DE VALOR INCORRETO
+        } while ((!login.equals("-1")) && (!senha.equals("-1")) && logar == 0);  //VALIDACAO DE VALOR INCORRETO
         return logar;
     }
 
@@ -131,7 +131,7 @@ public class Usuario {
                 aux = Integer.parseInt(Main.lerDados(scan, "Digite um valor: "));
             } while (Main.verOpcao(aux, 0, 3));
             if (aux != 0)
-                switch (aux) {// USA O METODO PARA EDITAR AS METO DO USUARIO
+                switch (aux) {// USA O METODO PARA EDITAR OS DADOS DO USUARIO
                     case 1 -> this.editarAtributoUsuario(scan, "nome");
                     case 2 -> this.editarAtributoUsuario(scan, "email");
                     case 3 -> this.editarAtributoUsuario(scan, "senha");

@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 public class Funcionario extends Usuario {  //HERANÇA DE USUARIO
 
-    //construtor de funcionario
+    //CONSTRUTOR DE FUNCIONARIO 
     public Funcionario(String nome, String email, String senha, int idUsuario) {
-        super(nome, email, senha, idUsuario); // ID tem que ser NEGATIVO para funcionario
+        super(nome, email, senha, idUsuario); // ID É NEGATIVO PARA FUNCIONARIO
     }
 //-------------------------------------------------------------------------------------------------------------------
 
-    // metodo para todas as funcionalidades de funcionario
+    // METODO PARA TODAS AS FUNCIONALIDADES DE FUNCIONARIO
     public static void metodosFuncionario(Scanner scan, int logar, Funcionario f1, Funcionario f2, ArrayList<Carro> carros) {
         String opc;
         do {
@@ -20,7 +20,7 @@ public class Funcionario extends Usuario {  //HERANÇA DE USUARIO
             switch (opc) {
                 case "0":   //SAIR
                     break;
-                case "1":   // EDITAR PERFIL DO FUNCIONARIO
+                case "1":   //EDITAR PERFIL DO FUNCIONARIO
                     if (f1.getIdUsuario() == logar) //REALIZAR POR ARRAY QUANDO IMPLEMENTAR BANCO DE DADOS.
                         f1.editarPerfil(scan);
                     else

@@ -1,12 +1,12 @@
-package Locadora1;
-import java.util.Scanner;
-public class CaractCarro {
+package Locadora1;  //PACOTE
+import java.util.Scanner;   //BIBLIOTECAS
+public abstract class CaractCarro {     //SUPER CLASSE ABSTRATA 
 
-    private String modelo;
-    private String cor;
-    private String ano;
-    private String descricao;
-    private float valor;
+    private String modelo;   //ATRIBUTO
+    private String cor;      //ATRIBUTO
+    private String ano;      //ATRIBUTO
+    private String descricao;//ATRIBUTO
+    private float valor;     //ATRIBUTO
 //-------------------------------------------------------------------------------------------------------------------
 
     //CONSTRUTORES DE CaractCarro

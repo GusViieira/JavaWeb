@@ -7,7 +7,9 @@ public class CaractCarro {
     private String ano;
     private String descricao;
     private float valor;
+//-------------------------------------------------------------------------------------------------------------------
 
+    //CONSTRUTORES DE CaractCarro
     public CaractCarro(String modelo, String cor, String ano, String descricao, float valor) {
         this.modelo = modelo;
         this.cor = cor;
@@ -19,48 +21,60 @@ public class CaractCarro {
     public CaractCarro(){
         
     }
+//-------------------------------------------------------------------------------------------------------------------
 
+    //METODO GET modelo
     public String getModelo() {
         return modelo;
     }
 
+    //METODO SET modelo
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
 
+    //METODO GET cor
     public String getCor() {
         return cor;
     }
 
+    //METODO SET cor
     public void setCor(String cor) {
         this.cor = cor;
     }
 
+    //METODO GET ano
     public String getAno() {
         return ano;
     }
 
+    //METODO SET ano
     public void setAno(String ano) {
         this.ano = ano;
     }
 
+    //METODO GET descricao
     public String getDescricao() {
         return descricao;
     }
 
+    //METODO SET descricao
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
+    //METODO GET valor
     public float getValor() {
         return valor;
     }
 
+    //METODO SET valor
     public void setValor(float valor) {
         this.valor = valor;
     }
+//-------------------------------------------------------------------------------------------------------------------
 
-    //metodo para cadastrar um carro
+    //METODO PARA CADASTRAR UM CARRO
     public boolean obterCarro(Scanner scan) {
         Carro car = new Carro();
         Main.telasLocadora("LOCADORA PAO DURO", "CADASTRAR CARRO", Main.textosProntos(5));
@@ -73,33 +87,31 @@ public class CaractCarro {
                     car.setDescricao(Main.lerDados(scan, "Informe descricao (ou '-1' para sair): "));
                     if (!car.getDescricao().equals("-1")) {
                         car.setValor(Float.parseFloat(Main.lerDados(scan, "Informe valor (ou '-1' para sair): ")));
-                        if (car.getValor() != -1) { // colocar os dados dentro de um dos elementos do objeto
+                        if (car.getValor() != -1) {     //COLOCAR OS DADOS DENTRO DE UM NOVO OBJETO
                             this.setModelo(car.getModelo());
                             this.setCor(car.getCor());
                             this.setAno(car.getAno());
                             this.setDescricao(car.getDescricao());
                             this.setValor(car.getValor());
-                            return true; // cadastro ocorreu de forma correta
+                            return true;    //CADASTRO OCORREU CORRETAMENTE
                         }
                     }
                 }
             }
         }
-        return false; // valor false caso o usuario digitar "-1"
+        return false; //CADASTRO NAO OCORREU(POR ERRO OU USUARIO DIGITAR "-1")
     }
     
-    //Metodo para editar o valor de "caractCarro" de "carro"
+    //METODO PARA EDITAR O CARRO
     public void editarCarro(Scanner scan) {
         int aux;
         do {
-            do { // verifica e valida a digitação da opção para editar
-                System.out.println("\n");
-                System.out.println(this.toString()); // para testes
+            do {    //VERIFICA E VALIDA OPCAO PARA EDITAR
                 Main.telasLocadora("LOCADORA PAO DURO", "EDITAR CARRO", Main.textosProntos(4));
                 aux = Integer.parseInt(Main.lerDados(scan, "Digite um valor: "));
             } while (Main.verOpcao(aux, 0, 5));
             if (aux != 0)
-                switch (aux) {//vai para o metodo de editar o atributo do usuario
+                switch (aux) {      //CHAMA O METODO EDITAR OS DADOS DO CARRO
                     case 1 -> this.editarAtributoCarro(scan, "modelo");
                     case 2 -> this.editarAtributoCarro(scan, "cor");
                     case 3 -> this.editarAtributoCarro(scan, "ano");
@@ -111,11 +123,11 @@ public class CaractCarro {
         } while (aux != 0);
     }
     
-    // para editar os atributos de string do cliente
-    public void editarAtributoCarro(Scanner scan, String str) { // str -> Qual tipo ira editar
+    //METODO PARA EDITAR OS DADOS DO CARRO
+    public void editarAtributoCarro(Scanner scan, String str) { //str -> QUAL TIPO IRA EDITAR
         String frase;
         String ant = "|" + str + " atual: ";
-        switch (str) { // personalizar a string ant para apresentar na tela o valor antigo da string que esta editando
+        switch (str) {      //MUDA A STRING ANT PARA APRESENTAR VALOR ANTIGO DA STRING QUE IRA EDITAR
             case "modelo" -> ant = ant.concat(this.getModelo());
             case "cor" -> ant = ant.concat(this.getCor());
             case "ano" -> ant = ant.concat(this.getAno());
@@ -123,9 +135,9 @@ public class CaractCarro {
             case "valor" -> ant = ant.concat(String.valueOf(this.getValor()));
         }
         Main.telasLocadora("LOCADORA PAO DURO", "EDITAR " + str.toUpperCase(), ant);
-        frase = Main.lerDados(scan, "Digite o " + str + " (ou '-1' para sair): ");//verifica e valida a digitação da nova string
+        frase = Main.lerDados(scan, "Digite o " + str + " (ou '-1' para sair): ");     //VERIFICA E VALIDA DADOS DIGITADOS
         if (!frase.equals("-1"))
-            switch (str) { // atualiza a nova string
+            switch (str) {      //MODIFICA A NOVA STRING(ATRIBUTO)
                 case "modelo" -> this.setModelo(frase);
                 case "cor" -> this.setCor(frase);
                 case "ano" -> this.setAno(frase);

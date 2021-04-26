@@ -1,44 +1,49 @@
-package Locadora1;  //PACOTE
+package Locadora1;
 
-import java.util.Scanner;   //BIBLIOTECAS
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
-
     //METODO PRINCIPAL DO PROGRAMA
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        ArrayList<Cliente> clientes = new ArrayList<>();       //INSTANCIA LISTA DE CLIENTES
-        ArrayList<Carro> carros = new ArrayList<>();           //INSTANCIA LISTA DE CARROS
-        Funcionario f1 = new Funcionario("Alan", "alan@gmail.com", "123456", -1);           //INSTANCIA FUNCIONARIO f1
-        Funcionario f2 = new Funcionario("Gabriel", "gabriel@gmail.com", "123456", -2);     //INSTANCIA FUNCIONARIO f2
+        ArrayList<Cliente> clientes = new ArrayList<>();     //OBJETO: LISTA DE CLIENTES
+        ArrayList<Carro> carros = new ArrayList<>();           //OBJETO: LISTA DE CARROS
+        Funcionario f1 = new Funcionario("Alan", "alan@gmail.com", "123456", -1);     //OBJETO: FUNCIONARIO f1
+        Funcionario f2 = new Funcionario("Gabriel", "gabriel@gmail.com", "123456", -2);     //OBJETO: FUNCIONARIO f2
         do {    //INICIO DO LOOPING DO MENU
             telasLocadora("LOCADORA PAO DURO", "BEM VINDO", textosProntos(8));
             switch (lerDados(scan, "Informe a ação que deseja: ")) {
                 case "0":   //SAIR
                     System.exit(0);
                     break;
-                case "1":   //CADASTRO
-                    Cliente.cadastrarCliente(scan, clientes);
+                case "1":   //CADASTRO CLIENTE
+                    Cliente aux = new Cliente();
+                    if (aux.cadastrarCliente(scan, clientes))
+                        clientes.add(aux);
                     break;
                 case "2":   //LOGIN
                     int logar = Usuario.login(scan, clientes, f1, f2);
                     if (logar != 0) {
                         if (logar < 0) {    //LOGIN COMO FUNCIONARIO
-                            Funcionario.metodosFuncionario(scan, logar, f1, f2, carros);
+                            if (f1.getIdUsuario() == logar)
+                                f1.metodosFuncionario(scan, carros);
+                            else
+                                f2.metodosFuncionario(scan, carros);
                         }
                         if (logar > 0) {    //LOGIN COMO CLIENTE
-                            Cliente.metodosCliente(scan, logar, clientes, carros);
+                            clientes.get(logar - 1).metodosCliente(scan, carros);
                         }
                     }
                     break;
             }
+            System.out.println("\n\n");//PARA PULAR LINHAS
         } while (true);
     }
 
     //METODO QUE VERIFICA SE opc ESTA ENTRE ini E fim
     public static boolean verOpcao(int opc, int ini, int fim) {
-        //opc FALSE - NUMERO QUE NAO EXISTE; opc TRUE - NUMERO QUE EXISTE
+        //opc FALSE - NUMERO QUE NAO EXISTE; opc TRUE - nuNUMERO QUE EXISTE
         return opc < ini || opc > fim;
     }
 
@@ -47,10 +52,10 @@ public class Main {
         String frase = null;
         switch (i) {    //INFORMACOES CONTIDAS NAS TELAS DO PROGRAMA
             case 1:     //TELA PRINCIPAL DO CLIENTE
-                frase = "|0 - Sair\n|1 - Editar Perfil\n|2 - Alugar\n|3 - Ver Carro Alugado";
+                frase = "|0 - Sair\n|1 - Editar Perfil\n|2 - Alugar\n|3 - Ver Carro Alugado\n|4 - Retornar Carro";
                 break;
             case 2:     //TELA DE EDITAR PERFIL
-                frase = "|0 - Sair\n|1 - Editar nome\n|2 - Editar Email\n|3 - Editar Senha";
+                frase = "|0 - Sair\n|1 - Editar Nome\n|2 - Editar Email\n|3 - Editar Senha";
                 break;
             case 3:     //TELA DE LOGIN
                 frase = "|Email: String\n|Senha: String";

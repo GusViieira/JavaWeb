@@ -10,7 +10,7 @@ public class Carro extends CaractCarro {    //HERANÇA DE CARACTCARRO
 
 //-------------------------------------------------------------------------------------------------------------------
 
-    //CONSTRUTORES DE Carro
+    //CONSTRUTORES DE CARRO
     public Carro(String modelo, String cor, String ano, String descricao, float valor) {
         super(modelo, cor, ano, descricao, valor);
     }
@@ -45,20 +45,10 @@ public class Carro extends CaractCarro {    //HERANÇA DE CARACTCARRO
     public static void cadastrarCarro(Scanner scan, ArrayList<Carro> carros) {
         Carro car = new Carro();
         if (car.obterCarro(scan)) {
-            car.setIdCarro(carros.size() + 1); // idCarro É O INDEX(posicao do array) + 1
+            car.setIdCarro(carros.size() + 1); // idCarro vai de 1 para cima
             car.setDispCarro(true);
             carros.add(car);
         }
-    }
-
-    //METODO PARAR LISTAR CARROS
-    public static String listarCarros(ArrayList<Carro> carros) {
-        String texto = "CODIGO   -    MODELO      -   ANO    -    VALOR\n";
-        for (Carro aux : carros) {
-            if (aux.isDispCarro())
-                texto += aux.toString();
-        }
-        return texto;   //RETORNA STRING QUE CONTEM A LISTA DE CARROS
     }
 
     //  METODO PARA EXIBIR INFORMACOES DO CARRO: idCarro - modelo - ano - valor
@@ -66,7 +56,7 @@ public class Carro extends CaractCarro {    //HERANÇA DE CARACTCARRO
         return "IDCarro = " + this.getIdCarro() + "|" +
                "Modelo = " + super.getModelo() + "|" +
                "Ano = " + super.getAno() + "|" +
-               "Valor = R$" + super.getValor() + "\n";
+               "Valor = R$" + super.getValor();
     }
 
 }

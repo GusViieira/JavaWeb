@@ -3,7 +3,7 @@ package Locadora1;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Usuario {      //SUPER CLASSE ABSTRATA
+public abstract class Usuario {  //SUPER CLASSE ABSTRATA
 
     private String nome;
     private String email;
@@ -52,7 +52,7 @@ public abstract class Usuario {      //SUPER CLASSE ABSTRATA
         return senha;
     }
 
-    //METODO SET senga
+    //METODO SET senha
     public void setSenha(String senha) {
         senha = senha.trim();
         this.senha = senha;
@@ -72,6 +72,7 @@ public abstract class Usuario {      //SUPER CLASSE ABSTRATA
     //METODO PARA CADASTRAR AS INFORMACOES DE USUARIO
     public boolean cadastrarUsuario(Scanner scan) {
         Cliente cl = new Cliente();
+        System.out.println("\n\n");//PARA PULAR LINHAS
         Main.telasLocadora("LOCADORA PAO DURO", "CADASTRAR USUARIO", Main.textosProntos(6));
         cl.setNome(Main.lerDados(scan, "Informe o nome (ou '-1' para sair): "));
         if (!cl.getNome().equals("-1")) {
@@ -91,7 +92,8 @@ public abstract class Usuario {      //SUPER CLASSE ABSTRATA
 
     //METODO PARA TELA DE LOGIN
     public static int login(Scanner scan, ArrayList<Cliente> clientes, Funcionario f1, Funcionario f2) {
-        String login, senha=null;    //LOGIN: 0 - INICIALIZADO LOGAR; -1 - VALOR INCORRETO; OUTRO VALOR POSITIVO - POSICAO (INDEX) DO CLIENTE
+        String login, senha = null;    //LOGIN: 0 - INICIALIZADO LOGAR; -1 - VALOR INCORRETO; OUTRO VALOR POSITIVO - POSICAO (INDEX) DO CLIENTE
+        System.out.println("\n\n");//PARA PULAR LINHAS
         Main.telasLocadora("LOCADORA PAO DURO", "LOGIN", Main.textosProntos(3));
         int logar = 0;
         do {
@@ -127,11 +129,12 @@ public abstract class Usuario {      //SUPER CLASSE ABSTRATA
         int aux;
         do {
             do { // VALIDACAO DIGITADA PELO CLIENTE
+                System.out.println("\n\n");//PARA PULAR LINHAS
                 Main.telasLocadora("LOCADORA PAO DURO", "EDITAR PERFIL", Main.textosProntos(2));
                 aux = Integer.parseInt(Main.lerDados(scan, "Digite um valor: "));
             } while (Main.verOpcao(aux, 0, 3));
             if (aux != 0)
-                switch (aux) {// USA O METODO PARA EDITAR OS DADOS DO USUARIO
+                switch (aux) {// USA O METODO PARA EDITAR AS METO DO USUARIO
                     case 1 -> this.editarAtributoUsuario(scan, "nome");
                     case 2 -> this.editarAtributoUsuario(scan, "email");
                     case 3 -> this.editarAtributoUsuario(scan, "senha");
@@ -150,6 +153,7 @@ public abstract class Usuario {      //SUPER CLASSE ABSTRATA
             case "email" -> ant = ant.concat(this.getEmail());
             case "senha" -> ant = ant.concat(this.getSenha());
         }
+        System.out.println("\n\n");//PARA PULAR LINHAS
         Main.telasLocadora("LOCADORA PAO DURO", "EDITAR PERFIL", ant);
         frase = Main.lerDados(scan, "Digite o " + str + " (ou '-1' para sair): ");//VERIFICA E VALIDA A DIGITACAO DA NOVA STRING
         if (!frase.equals("-1"))

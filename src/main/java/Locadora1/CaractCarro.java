@@ -1,12 +1,12 @@
 package Locadora1;  //PACOTE
 import java.util.Scanner;   //BIBLIOTECAS
-public abstract class CaractCarro {     //SUPER CLASSE ABSTRATA 
+public abstract class CaractCarro {  //SUPER CLASSE ABSTRATA
 
-    private String modelo;   //ATRIBUTO
-    private String cor;      //ATRIBUTO
-    private String ano;      //ATRIBUTO
-    private String descricao;//ATRIBUTO
-    private float valor;     //ATRIBUTO
+    private String modelo;   //ATRIBUTOS
+    private String cor;      //ATRIBUTOS
+    private String ano;      //ATRIBUTOS
+    private String descricao;//ATRIBUTOS
+    private float valor;     //ATRIBUTOS
 //-------------------------------------------------------------------------------------------------------------------
 
     //CONSTRUTORES DE CaractCarro
@@ -77,6 +77,7 @@ public abstract class CaractCarro {     //SUPER CLASSE ABSTRATA
     //METODO PARA CADASTRAR UM CARRO
     public boolean obterCarro(Scanner scan) {
         Carro car = new Carro();
+        System.out.println("\n\n");//PARA PULAR LINHAS
         Main.telasLocadora("LOCADORA PAO DURO", "CADASTRAR CARRO", Main.textosProntos(5));
         car.setModelo(Main.lerDados(scan, "Informe modelo (ou '-1' para sair): "));
         if (!car.getModelo().equals("-1")) {

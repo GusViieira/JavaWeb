@@ -3,13 +3,12 @@ package Locadora1;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Cliente extends Usuario {  //HERANÇA DE USUARIO
-
+public class Cliente extends Usuario implements Interface {  //HERANÇA DE USUARIO
     private Carro carAlug;
 
 //-------------------------------------------------------------------------------------------------------------------
 
-    // CONSTRUTORES DE CLIENTE
+    //CONSTRUTORES DE CLIENTE
     public Cliente(String nome, String email, String senha, int idUsuario) {
         super(nome, email, senha, idUsuario);
     }
@@ -31,41 +30,45 @@ public class Cliente extends Usuario {  //HERANÇA DE USUARIO
 //-------------------------------------------------------------------------------------------------------------------
 
     //METODO QUE CRIA UM NOVO CADASTRO DE CLIENTE
-    public static void cadastrarCliente(Scanner scan, ArrayList<Cliente> clientes) {
-        Cliente cliente = new Cliente();
-        if (cliente.cadastrarUsuario(scan)) {
-            cliente.setIdUsuario(clientes.size() + 1); // IdUsuario VAI SER INDEX(posicao do array) + 1
-            clientes.add(cliente);
+    public boolean cadastrarCliente(Scanner scan, ArrayList<Cliente> clientes) {
+        if (this.cadastrarUsuario(scan)) {
+            this.setIdUsuario(clientes.size() + 1); //idUsuario IRÁ SER INDEX(posicao no array) + 1
+            return true;
         }
+        return false;
     }
 
-    //MOSTRA UM PRINT DOS DADOS DE CARRO DO CLIENTE
+    //MOSTRA O CARRO ALUGADO PELO CLIENTE
     public void verCarroAlug() {
-        System.out.printf(" -----------------------\n" +
-                          "|   LOCADORA PAO DURO   |\n" +
-                          "-----------------------\n" +
-                          "|     Carro alugado     |\n" +
-                          "-----------------------\n" +
-                          "|Modelo: %s\n" +
-                          "|Cor: %s\n" +
-                          "|Ano do ve\u00edculo: %s\n" +
-                          "|Descri\u00e7\u00e3o: %s\n" +
-                          "|Valor do carro: R$ %.2f\n" +
-                          "-----------------------\n",
-                this.getCarAlug().getModelo(),
-                this.getCarAlug().getCor(),
-                this.getCarAlug().getAno(),
-                this.getCarAlug().getDescricao(),
-                this.getCarAlug().getValor());
+        System.out.print("\n\n -----------------------\n" +
+                         "|   LOCADORA PAO DURO   |\n" +
+                         "-----------------------\n" +
+                         "      Carro alugado     \n" +
+                         "-----------------------\n");
+        if (this.getCarAlug() != null) //MOSTRAR AS INFORMACOES DO CARRO
+            System.out.printf("|Modelo: %s\n" +
+                              "|Cor: %s\n" +
+                              "|Ano do ve\u00edculo: %s\n" +
+                              "|Descri\u00e7\u00e3o: %s\n" +
+                              "|Valor do carro: R$ %.2f\n" +
+                              "-----------------------\n",
+                    this.getCarAlug().getModelo(),
+                    this.getCarAlug().getCor(),
+                    this.getCarAlug().getAno(),
+                    this.getCarAlug().getDescricao(),
+                    this.getCarAlug().getValor());
+        else
+            System.out.println("\n NAO EXISTE UM CARRO ALUGADO\n\n-----------------------");//QUANDO NAO HOUVER CARRO CADASTRADO
     }
 
-    // METODO PARA CLIENTE ALUGAR CARRO
+    //METODO PARA CLIENTE ALUGAR CARRO
     public void alugarCarro(Scanner scan, ArrayList<Carro> carros) {
         Carro aux;
         int var, index;
-        Main.telasLocadora("LOCADORA PAO DURO", "ALUGAR CARRO", Carro.listarCarros(carros)); // TELA MOSTRANDO TODOS OS CARROS DISPONIVEIS PARA ALUGAR
+        System.out.println("\n\n");//PARA PULAR LINHAS
+        Main.telasLocadora("LOCADORA PAO DURO", "ALUGAR CARRO", this.listarCarros(carros)); //TELA MOSTRANDO TODOS OS CARROS DISPONIVEIS PARA ALUGAR
         boolean i;
-        do {    // VERIFICACAO DE CODIGO DO CARRO
+        do {    //VERIFICACAO DE CODIGO DO CARRO
             i = false;
             var = Integer.parseInt(Main.lerDados(scan, "Digite o codigo do ID do carro: "));
             index = Main.indexOfIdCarro(carros, var);
@@ -76,6 +79,7 @@ public class Cliente extends Usuario {  //HERANÇA DE USUARIO
             }
         } while (i);
         aux = carros.get(index);    //RECEBE O CARRO DISPONIVEL
+        System.out.println("\n\n");//PARA PULAR LINHAS
         Main.telasLocadora("LOCADORA PAO DURO", "ALUGAR CARRO", aux.toString());
         var = Integer.parseInt(Main.lerDados(scan, "Quer alugar esse carro? (1/SIM)(0/NAO): "));
         if (var == 1) {
@@ -84,25 +88,54 @@ public class Cliente extends Usuario {  //HERANÇA DE USUARIO
         }
     }
 
-    // METODO PARA TODAS AS FUNCIONALIDADES DE CLIENTE
-    public static void metodosCliente(Scanner scan, int logar, ArrayList<Cliente> clientes, ArrayList<Carro> carros) {
+    //METODO PARA RETORNAR O CARRO ALUGADO
+    public void retornarCarro() {
+        this.getCarAlug().setDispCarro(true);
+        this.setCarAlug(null);
+    }
+
+    //METODO PARA TODAS AS FUNCIONALIDADES DE CLIENTE
+    public void metodosCliente(Scanner scan, ArrayList<Carro> carros) {
         String opc;
-        do { // LOOPING DE MENU DE CLIENTE
-            Main.telasLocadora("LOCADORA PAO DURO", "BEM VINDO", Main.textosProntos(1));
+        do {    //LOOPING DE MENU DE CLIENTE
+            System.out.println("\n\n");     //PARA PULAR LINHAS
+            Main.telasLocadora("LOCADORA PAO DURO", "BEM VINDO " + this.getNome(), Main.textosProntos(1));
             opc = Main.lerDados(scan, "Informe a ação que deseja: ");
             switch (opc) {
                 case "0":   //SAIR
                     break;
                 case "1":   //EDITAR PERFIL DO CLIENTE
-                    clientes.get(logar - 1).editarPerfil(scan);
+                    this.editarPerfil(scan);
                     break;
-                case "2":   //ALUGAR CARRO
-                    clientes.get(logar - 1).alugarCarro(scan, carros);
+                case "2":   //ALUGAR CARRO (APENAS 1)
+                    if (this.getCarAlug() == null)
+                        this.alugarCarro(scan, carros);
+                    else
+                        System.out.println("\n\n\nNAO EH POSSIVEL ALUGAR MAIS DE UM CARROS");
                     break;
                 case "3":   //VER O CARRO ALUGADO
-                    clientes.get(logar - 1).verCarroAlug();
+                    this.verCarroAlug();
+                    System.out.println("Digite qualquer coisa para voltar...");
+                    scan.nextLine();
+                    break;
+                case "4":   //RETORNA O CARRO PARA ALUGUEL NOVAMENTE
+                    if (this.getCarAlug() != null)
+                        this.retornarCarro();
+                    else
+                        System.out.print("\n\n\nNAO EXITE UM CARRO ALUGADO PELO CLIENTE\t Tente novamente...");
                     break;
             }
         } while (!opc.equals("0"));
+    }
+
+    //METODO PARAR LISTAR CARROS
+    @Override
+    public String listarCarros(ArrayList<Carro> carros) {
+        String texto = "CODIGO   -    MODELO      -   ANO    -    VALOR\n";
+        for (Carro aux : carros) {
+            if (aux.isDispCarro())
+                texto += (aux.toString() + "\n");
+        }
+        return texto + "\n";   //RETORNA STRING QUE CONTEM A LISTA DE CARROS
     }
 }

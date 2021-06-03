@@ -1,4 +1,4 @@
-package Locadora1;
+package com.mycompany.model;
 
 import java.util.ArrayList;
 

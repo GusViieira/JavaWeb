@@ -8,6 +8,8 @@
     <class>com.mycompany.model.Funcionario</class>
     <class>com.mycompany.model.Usuario</class>
     <class>com.mycompany.model.Usuário</class>
+    <class>com.mycompany.model.Aluga</class>
+    <class>com.mycompany.model.Endereco</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_locadora"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
